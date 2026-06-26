@@ -17,6 +17,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
@@ -59,10 +60,25 @@ class DataModule {
     @Provides
     fun provideOkHttpClient(
         chuckerInterceptor: ChuckerInterceptor
-    ): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(HttpLoggingInterceptor().setLevel(if (DEBUG) BODY else NONE))
-        .addInterceptor(chuckerInterceptor)
-        .build()
+    ): OkHttpClient {
+        val apiKeyInterceptor = Interceptor { chain ->
+            val original = chain.request()
+            val originalHttpUrl = original.url
+            val url = originalHttpUrl.newBuilder()
+                .addQueryParameter("api_key", "4f948dc2d121184b17586b04a38b778a")
+                .build()
+            val requestBuilder = original.newBuilder()
+                .url(url)
+            val request = requestBuilder.build()
+            chain.proceed(request)
+        }
+
+        return OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(if (DEBUG) BODY else NONE))
+            .addInterceptor(chuckerInterceptor)
+            .addInterceptor(apiKeyInterceptor)
+            .build()
+    }
 
     @Provides
     fun provideMoshiConverterFactory(): MoshiConverterFactory = MoshiConverterFactory.create()

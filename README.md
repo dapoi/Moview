@@ -14,8 +14,8 @@ project-root/
 ├── core/data/          # Data handling (repository, API, database)
 │   ├── api/            # (Recommended) Separate module if you have multiple services
 ├── core/navigation/    # Navigation handling module
-├── feature/home/       # Home feature module
-├── feature/info/       # Info feature module
+├── feature/movie/      # Module that include list & detail movie
+├── feature/favorite/   # Module that provide favorite list movie
 ├── build-logic/        # Gradle convention plugins
 ```
 
@@ -26,8 +26,7 @@ project-root/
 
 ## Available Technologies in the Template
 - Hilt (Dependency Injection)
-- Type Safe Jetpack Navigation
+- Navigation 3
 - Coroutine & Flow
 - Retrofit & Moshi
-- DataStore
 - Room Database

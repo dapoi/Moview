@@ -23,7 +23,7 @@ project-root/
 - JDK 21+
 - Gradle 9.5.1
 
-## Available Technologies in the Template
+## Available Technologies
 - Hilt (Dependency Injection)
 - Navigation 3
 - Coroutine & Flow

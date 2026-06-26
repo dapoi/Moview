@@ -16,6 +16,7 @@ class AndroidLibPlugin : Plugin<Project> {
                 alias(libs.plugins.android.library)
                 alias(libs.plugins.kotlin.compose)
                 alias(libs.plugins.convention.hilt)
+                alias(libs.plugins.convention.common)
             }
 
             extensions.configure<LibraryExtension> {

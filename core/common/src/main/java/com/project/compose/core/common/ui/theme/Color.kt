@@ -13,3 +13,7 @@ val BackgroundDark = Color(0xFF1D1D1D)
 val BackgroundLight = Color(0xFFECECEC)
 val SurfaceLight = Color(0xFFF3F3F3)
 val SurfaceDark = Color(0xFF1A1A1A)
+
+val NetflixRed = Color(0xFFE50914)
+val DeepBlack = Color(0xFF000000)
+val DarkGrey = Color(0xFF141414)

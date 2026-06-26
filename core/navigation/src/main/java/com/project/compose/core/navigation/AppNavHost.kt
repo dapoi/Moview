@@ -1,8 +1,10 @@
 package com.project.compose.core.navigation
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,30 +24,20 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.runtime.serialization.NavKeySerializer
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.compose.serialization.serializers.MutableStateSerializer
-import com.project.compose.core.common.R
-import com.project.compose.core.common.ui.component.AppBottomBar
-import com.project.compose.core.common.ui.component.attr.AppBottomBarAttr.BottomNavItem
 import com.project.compose.core.common.utils.LocalActivity
 import com.project.compose.core.navigation.base.BaseNavGraph
 import com.project.compose.core.navigation.helper.NavigationState
 import com.project.compose.core.navigation.helper.Navigator
-import com.project.compose.core.navigation.route.HomeGraph.HomeLandingRoute
-import com.project.compose.core.navigation.route.InfoGraph.InfoLandingRoute
+import com.project.compose.core.navigation.route.HomeGraph.MovieLandingRoute
 
 @Composable
 fun AppNavHost(navGraphs: Set<@JvmSuppressWildcards BaseNavGraph>) {
     val activity = LocalActivity.current
-    val bottomNavItems = remember { getBottomNav() }
-    val topLevelRoutes = remember { bottomNavItems.map { it.route }.toSet() }
     val navigationState = rememberNavigationState(
-        startRoute = HomeLandingRoute,
-        topLevelRoutes = topLevelRoutes
+        startRoute = MovieLandingRoute,
+        topLevelRoutes = setOf(MovieLandingRoute)
     )
     val navigator = remember(activity) { Navigator(navigationState, activity) }
-    val currentRoute = navigationState.backStacks[navigationState.topLevelRoute]?.lastOrNull()
-    val showBottomNav = remember(currentRoute) {
-        bottomNavItems.any { it.route == currentRoute }
-    }
     val entryProvider = entryProvider {
         navGraphs.forEach { navGraph ->
             with(navGraph) { createGraph(navigator) }
@@ -56,21 +48,18 @@ fun AppNavHost(navGraphs: Set<@JvmSuppressWildcards BaseNavGraph>) {
         NavDisplay(
             modifier = Modifier.fillMaxSize(),
             entries = navigationState.toEntries(entryProvider),
-            onBack = { navigator.goBack() }
-        )
-
-        AppBottomBar(
-            modifier = Modifier.fillMaxWidth(),
-            bottomNavItems = bottomNavItems,
-            selectedRoute = navigationState.topLevelRoute,
-            showBottomNav = showBottomNav,
-            onClickNavItem = { route ->
-                val navKey = route as NavKey
-                if (navKey == navigationState.topLevelRoute) {
-                    navigator.navigate(navKey, popUpTo = navKey, isInclusive = false)
-                } else {
-                    navigator.navigate(navKey)
-                }
+            onBack = { navigator.goBack() },
+            transitionSpec = {
+                slideInHorizontally(initialOffsetX = { it }) togetherWith
+                        slideOutHorizontally(targetOffsetX = { -it })
+            },
+            popTransitionSpec = {
+                slideInHorizontally(initialOffsetX = { -it }) togetherWith
+                        slideOutHorizontally(targetOffsetX = { it })
+            },
+            predictivePopTransitionSpec = {
+                slideInHorizontally(initialOffsetX = { -it }) togetherWith
+                        slideOutHorizontally(targetOffsetX = { it })
             }
         )
     }
@@ -117,8 +106,3 @@ private fun NavigationState.toEntries(
         .flatMap { decoratedEntries[it] ?: emptyList() }
         .toMutableStateList()
 }
-
-private fun getBottomNav() = listOf(
-    BottomNavItem(route = HomeLandingRoute, icon = R.drawable.ic_home, label = "Home"),
-    BottomNavItem(route = InfoLandingRoute, icon = R.drawable.ic_info, label = "Info")
-)

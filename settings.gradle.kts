@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-rootProject.name = "StarterTemplate"
+rootProject.name = "Moview"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -37,4 +37,5 @@ include(":app")
 include(":core:common")
 include(":core:data")
 include(":core:navigation")
-include(":feature:home")
+include(":feature:favorite")
+include(":feature:movie")

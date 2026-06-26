@@ -1,11 +1,19 @@
 package util
 
-import util.ConstantLibs.coreModules
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import util.ConstantLibs.KSP
+import util.ConstantLibs.coreModules
 
 object CollectionLibs {
+    fun Project.commonDependencies() {
+        dependencies {
+            testImplementation(libs.junit.get())
+            testImplementation(libs.kotlinx.coroutines.test.get())
+            testImplementation(libs.mockito.core.get())
+        }
+    }
+
     fun Project.composeDependencies() {
         dependencies {
             val bom = libs.androidx.compose.bom.get()
@@ -13,6 +21,7 @@ object CollectionLibs {
             androidTestImplementation(platform(bom))
             implementation(libs.androidx.activity.compose.get())
             implementation(libs.androidx.appcompat.get())
+            implementation(libs.androidx.compose.material.icons.extended.get())
             implementation(libs.androidx.compose.material3.get())
             implementation(libs.androidx.compose.ui.tooling.preview.get())
             debugImplementation(libs.androidx.compose.ui.tooling.debug.get())
@@ -21,6 +30,7 @@ object CollectionLibs {
             implementation(libs.coil.network.get())
             implementation(libs.coil.video.get())
             implementation(libs.timber.get())
+            implementation(libs.youtubePlayer.get())
         }
     }
 
@@ -38,6 +48,9 @@ object CollectionLibs {
             add(KSP, libs.room.compiler.get())
             debugImplementation(libs.chucker.debug.get())
             releaseImplementation(libs.chucker.release.get())
+            testImplementation(libs.junit.get())
+            testImplementation(libs.kotlinx.coroutines.test.get())
+            testImplementation(libs.mockito.core.get())
         }
     }
 }

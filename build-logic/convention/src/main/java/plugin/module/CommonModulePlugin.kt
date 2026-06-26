@@ -1,5 +1,6 @@
 package plugin.module
 
+import util.CollectionLibs.commonDependencies
 import util.alias
 import util.libs
 import org.gradle.api.Plugin
@@ -12,6 +13,7 @@ class CommonModulePlugin : Plugin<Project> {
                 alias(libs.plugins.convention.android.library)
                 alias(libs.plugins.convention.compose.library)
             }
+            commonDependencies()
         }
     }
 }

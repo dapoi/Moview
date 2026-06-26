@@ -22,6 +22,9 @@ fun DependencyHandler.debugImplementation(dependencyNotation: Any): Dependency? 
 fun DependencyHandler.releaseImplementation(dependencyNotation: Any): Dependency? =
     add("releaseImplementation", dependencyNotation)
 
+fun DependencyHandler.testImplementation(dependencyNotation: Any): Dependency? =
+    add("testImplementation", dependencyNotation)
+
 fun PluginManager.alias(notation: Provider<PluginDependency>) {
     apply(notation.get().pluginId)
 }

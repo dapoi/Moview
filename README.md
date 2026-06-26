@@ -1,6 +1,5 @@
-# Jetpack Compose Starter Template
-
-A starter template for Android development using Jetpack Compose, following best practices and modularization.
+# Moview
+This app made for demonstration latest technology with jetpack compose
 
 ## Highlights
 - **Jetpack Compose UI** - Fully built using Jetpack Compose for a modern UI experience.
@@ -21,60 +20,14 @@ project-root/
 ```
 
 ## Prerequisites
-- Android Studio Meerkat or newer
+- Android Studio Quail
 - JDK 21+
-- Gradle 8.14.2
-
-## Use This Template
-This repository is set up as a template! 🚀 Click the **"Use this template"** button on GitHub to create your own repository based on this starter template.
-> ![image](https://github.com/user-attachments/assets/504f2c84-f260-4c94-9123-705f1cf30d86)
+- Gradle 9.5.1
 
 ## Available Technologies in the Template
 - Hilt (Dependency Injection)
 - Type Safe Jetpack Navigation
 - Coroutine & Flow
-- Retrofit & Gson
+- Retrofit & Moshi
 - DataStore
 - Room Database
-
-## 🧰 Android Module Generator
-This project comes with a CLI script to auto-generate new modules in a snap.
-
-### ⚙️ How To Use
-Make the script executable:
-```bash
-chmod +x android-module-generator.sh
-```
-
-Run the generator:
-```bash
-./android-module-generator.sh
-```
-
-## 🚀 Example
-
-```
-📦 Base package (example: com.project.app): com.example.app
-📁 Parent folder (example: feature): feature
-🧩 Module name (example: home): profile
-```
-
-Generates:
-
-```
-feature/
-└── profile/
-    ├── build.gradle.kts
-    └── src/
-        └── main/
-            └── java/com/example/app/feature/profile
-```
-
-and automatically updates `settings.gradle.kts`.
-
-
-## Contribution
-Contributions are welcome! Feel free to fork the repository and submit a pull request.
-
-## ⭐ Support
-If you find this project helpful, please consider giving it a star ⭐ on GitHub. Your support is greatly appreciated!

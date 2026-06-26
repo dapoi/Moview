@@ -12,7 +12,6 @@ project-root/
 ├── app/                # Main application module
 ├── core/common/        # Common utilities, components, and helpers
 ├── core/data/          # Data handling (repository, API, database)
-│   ├── api/            # (Recommended) Separate module if you have multiple services
 ├── core/navigation/    # Navigation handling module
 ├── feature/movie/      # Module that include list & detail movie
 ├── feature/favorite/   # Module that provide favorite list movie

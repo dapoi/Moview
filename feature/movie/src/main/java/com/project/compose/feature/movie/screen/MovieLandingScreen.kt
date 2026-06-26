@@ -84,7 +84,7 @@ internal fun MovieLandingScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "MoView",
+                        text = "moView",
                         color = NetflixRed,
                         style = MaterialTheme.typography.headlineLarge,
                         fontWeight = FontWeight.Bold
